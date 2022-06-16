@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    text-align: center;  
+  }
+  h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    background: rgb(78, 91, 105); 
+    color:  rgb(0, 0, 0); 
+    font-weight: bold; 
+    padding: 15px; 
+    border: 2px solid rgb(78, 91, 105); 
+    border-radius: 6px;
+  }
+  h5{
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    background: rgb(78, 91, 105); 
+    color:  rgb(0, 0, 0); 
+    font-weight: bold; 
+    padding: 15px; 
+    border: 2px solid rgb(78, 91, 105); 
+    border-radius: 6px;
+  }
+  #nombre{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 20px;
+      color: rgb(47, 0, 255);
+    }
+    h5{
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 30px
+  }
+  p{
+    font-family: 'Playfair Display', serif;
+  }
+</style>
+  <!-- carousel start -->
+      {% if figuras %}
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for figura in figuras %}
+              <div class="col md-4">
+                <div class="card h-100">
+                {% if figura.imagen1 %}
+                  <img src="{{figura.imagen1.url}}" class="card-img-top" alt="...">
+                  {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title">{{figura.nombre}} {{figura.apellido}}</h5>
+                    <p class="card-text">{{figura.art.titulo}}</p>
+                    <a href="{% url 'app:figura_detalle' figura.id %}" id="nombre"> Pulse aquí para más información sobre {{figura.nombre}}</a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %} 
+    {% else %} 
+      <h1> No existen figuras registradas </h1>
+    {% endif %}
+  <!-- carousel end -->
+
+{% endblock %}

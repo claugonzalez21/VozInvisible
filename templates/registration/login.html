@@ -1,0 +1,105 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            Iniciar Sesión
+        </title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/estiloLoginReg.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">    </head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+      </head>
+<body>
+{% block content %}
+<style>
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    text-align: left;  
+  }
+  h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    text-align: left;
+  }
+  h3{
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  #href{
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    text-align: left
+  }
+  #inv{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 18px;
+  }
+  .formu{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 18px;
+  }
+  #id_username{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 18px;
+  }
+  .centro{
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-left: 675px;
+      margin-top: 90px;
+    }
+</style>
+{% if form.errors %}
+<h3>Su nombre de usuario y contraseña no coinciden. Por favor, intentelo de nuevo.</h3>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Su cuenta no tiene acceso a esta página. Para continuar,
+      por favor, inicie sesión con una cuenta que tenga acceso o regístrese.</p>
+    {% endif %}
+{% endif %}
+
+<form class = "centro" method="post" action="{% url 'login' %}" >
+{% csrf_token %}
+
+<div class = "formu">
+  <h1>Iniciar Sesión</h1>
+  <h2>{{ form.username.label_tag }}</h2>
+  <td>{{ form.username }}</td>
+  </class>
+  
+</div>
+<div>
+  <h2>{{ form.password.label_tag }}</h2>
+  <td>{{ form.password }}</td>
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <p class="form-link"><a href="{% url 'password_reset' %}" id="href">He olvidado mi contraseña</a></class></p>
+  <p class="form-link"><h2>¿Aún no tienes una cuenta?</h2> <a href="{% url 'app:registrarse' %}" id="href">Regístrate aquí</a></p><br/>
+
+</div>
+
+<div align="center">
+  <input class = "formu" type="submit" value="Login" /> </class>
+  <input type="hidden" name="next" value="{{ next }}" />
+  <br>
+  <hr>
+  <br>
+  <p class="form-link"><a href="{% url 'pagina_principal' %}" id="inv">Entrar como invitado</a></p>
+</class>
+</div>
+</form>
+
+
+
+{% endblock %}
+</body>
+</html>

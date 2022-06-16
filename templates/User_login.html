@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+    {% block title_block %}
+        Login
+    {% endblock %}
+
+    {% block body_block %}
+    {% if user.is_authenticated %}
+        <error>{{error}}</error>
+       <p> Hi {{nombre}}you are already logged in.</p>
+       <p>If you want to log in with another account please log-out before.</p>
+    {% else %}
+        <h1>Please login to access this web site</h1>
+        <form id="login_form" method="post" action="{% url 'app:iniciar_sesion' %}">
+            {% csrf_token %}
+            Nombre de usuario: <input type="text" name="username" value="" size="50" />
+            <br><br>
+            Contrasena: <input type="password" name="password" value="" size="50" />
+            <br><br>
+            <input type="submit" value="login" />
+        </form>
+    </br>
+        <error>{{error}}</error>
+    {% endif %}
+    {% endblock %}

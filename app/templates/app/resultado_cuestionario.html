@@ -1,0 +1,66 @@
+{% extends "base.html" %} 
+ 
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      text-align: center;  
+    }
+    .card-text, .card-title{
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      text-align: center;  
+    }
+    .container{
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-left: 475px;
+      margin-top: 60px;
+    }
+</style>
+<div class="container ">
+        
+    <div class="card-columns" style="padding: 10px; margin: 20px;">
+        <div class="card" align="centre " style="width: 50rem; border:5px black solid">
+            <img class="card-img-top" src="https://logos.flamingtext.com/Word-Logos/resultados-design-china-name.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Puntuacion: {{puntuacion}}/{{total}}</h5>
+ 
+                <p class="card-text">Tiempo total: {{time}} seconds</p>
+                <p class="card-text">Respuestas correctas: {{n_correctas}}</p>
+                <p class="card-text">Respuestas incorrectas: {{n_incorrectas}}</p>
+                <!--<p class="card-text">{{lista_incorrectas}}</p>-->
+                <p class="card-text">Total de preguntas: {{total}}</p>
+
+                <h1>¡Mucha suerte en tu próximo cuestionario!</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ">
+
+    <div class="card-columns" style="padding: 10px; margin: 20px;">
+        <div class="card" align="centre " style="width: 50rem; border:5px black solid">
+            <img class="card-img-top" src="http://agrismartdata.com/wp-content/uploads/2019/02/Soluciones-para-agricultura-de-precisi%C3%B3n-1.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Puntuacion: {{puntuacion}}/{{total}}</h5>
+                {% for p in preguntas%}
+                    <p class="card-text" style="font-weight: bold";>Pregunta: {{p.pregunta}}</p>
+                    <p class="card-text">{{p.op1}}</p>
+                    <p class="card-text">{{p.op2}}</p>
+                    <p class="card-text">{{p.op3}}</p>
+                    <p class="card-text">{{p.op4}}</p>
+                    <p class="card-text" style="font-weight: bold";> La respuesta correcta era la {{p.respuesta}}</p>
+                    {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+ 
+</div>
+ 
+{% endblock %}

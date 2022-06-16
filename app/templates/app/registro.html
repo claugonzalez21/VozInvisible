@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .formu{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 18px;
+  }
+  .centro{
+    margin-top: 60px;
+  }
+</style>
+
+<form class = "centro" action="{% url 'app:registrarse' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class = "formu" type="submit" class="btn btn-success" id="Registrarse" value="Registrarse"></input></class>
+    {% for message in messages %}
+        <p class="item" id="messages">{{ message }}</p>
+    {% endfor%}
+</form>
+
+
+
+{% endblock %}

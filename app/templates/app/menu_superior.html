@@ -1,0 +1,71 @@
+{% load static %}
+ 
+<style>
+  .greet{
+    font-size: 20px;
+    color: #fff;
+    margin-right: 20px;
+    font-family: 'Playfair Display', serif;
+
+  }
+  .nav-link{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+
+  }
+</style>
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+
+ 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+ 
+    <ul class="navbar-nav">
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'pagina_principal' %}">Página principal</a> 
+      </li>
+      </li>
+      <li class="nav-item active">
+        
+      {% if request.user.is_staff %}
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'app:anadirPregunta' %}">Añadir Pregunta</a>
+      </li>
+      {% endif %} 
+ 
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+      </li>
+        <a class="nav-link" href="{% url 'app:figuras' %}">Conoce todas las voces olvidadas</a>
+      </li>
+        <a class="nav-link" href="{% url 'app:areas' %}">Categorías</a>
+      </li>
+      <a class="nav-link" href="{% url 'app:curiosidades' %}">¿Sabías qué?</a>
+      </li>
+      </li>
+      <a class="nav-link" href="{% url 'app:recursos' %}">Recursos para profundizar</a>
+      </li>
+
+      {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'app:categorias' %}">Mis juegos</a> 
+      </li>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+ 
+  <span class="greet">Hola, {{request.user}}</span>
+  <span ><a  class="greet" href="{% url 'logout' %}">Cerrar Sesión</a></span>
+ 
+</nav>

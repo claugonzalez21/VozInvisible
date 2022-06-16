@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      text-align: center;  
+    }
+    h2{
+      font-family: 'Playfair Display', serif;
+      text-align: left
+    }
+    #ref{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 18px;
+      color: rgb(0, 0, 0);
+      margin-left: 30px;
+    }
+    #sig{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 18px;
+      color: rgb(38, 0, 255);
+      font-weight: bold;
+      margin-left: 30px;
+      margin-bottom: 30px;
+    }
+    h5{
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 30px
+  }
+  p{
+    font-family: 'Playfair Display', serif;
+  }
+</style>
+    <h1>Descubre curiosidades sobre las mujeres que cambiaron el mundo</h1>
+      {% if curiosidades %}
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for curiosidad in curiosidades %}
+              <div class="col md-4">
+                <div class="card h-100" style="width: 400px; height: 400px;">
+                {% if curiosidad.imagen %}
+                  <img src="{{curiosidad.imagen.url}}" class="card-img-top" alt="...">
+                  {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title">{{curiosidad.titulo}}</h5>
+                    <p class="card-text">{{curiosidad.resumen}}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="pagination">
+              <span class="step-links">
+                  {% if page_obj.has_previous %}
+                      <a href="?page={{ page_obj.previous_page_number }}" id ="sig" >Anterior</a>
+                  {% endif %}
+  
+                  <span class="current" id ="ref">
+                      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                  </span>
+  
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}" id ="sig">Siguiente</a>
+                  {% endif %}
+              </span>
+          </div>   
+    {% else %} 
+      <h1> No existen curiosidades registradas </h1>
+    {% endif %}
+
+{% endblock %}

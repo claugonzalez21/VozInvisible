@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      text-align: center;  
+    }
+    #nombre{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 40px;
+      color: rgb(83, 78, 78);
+    }
+    #recursos{
+        margin-top: 70px;
+        text-align: center;
+    }
+    #ref{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 18px;
+      color: rgb(0, 0, 0);
+      margin-left: 30px;
+    }
+    #sig{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 18px;
+      color: rgb(38, 0, 255);
+      font-weight: bold;
+      margin-left: 30px;
+
+    }
+  </style>
+    <h1>Recursos para profundizar</h1>
+  {% if recursos %}
+          {% for recurso in recursos %}
+          <div id = "recursos">
+            <a href="{{recurso.url}}" id="nombre">{{ recurso.titulo }}</a>
+            <br>
+          </div>
+                
+          {% endfor %} 
+          <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" id ="sig" >Anterior</a>
+                {% endif %}
+
+                <span class="current" id ="ref">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" id ="sig">Siguiente</a>
+                {% endif %}
+            </span>
+        </div>   
+{% else %} 
+  <h1> No existen recursos registradas </h1>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      text-align: center;  
+    }
+    #boton{
+      font-family: 'Playfair Display', serif;
+      text-align: left;
+      font-size: 30px;
+    }
+    #ref{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 18px;
+      color: rgb(0, 0, 0);
+      margin-left: 30px;
+    }
+    #sig{
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 18px;
+      color: rgb(38, 0, 255);
+      font-weight: bold;
+      margin-left: 30px;
+
+    }
+</style>
+    <h1>Cuestionarios disponibles</h1>
+  {% if categorias %}
+  <br>
+  <br>
+          {% for categoria in categorias %}
+          <div class="container">
+            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+              <div class="col">
+                <div class="p-3 border bg-light"><a href="{% url 'app:categoria_detalle' categoria.nombre %}" id = "boton" class="btn btn-success">¡Haz un quiz sobre {{categoria.nombre}}!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" id ="sig" >Anterior</a>
+                {% endif %}
+
+                <span class="current" id ="ref">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" id ="sig">Siguiente</a>
+                {% endif %}
+            </span>
+        </div>    
+{% else %} 
+  <h1> No existen categorias registradas </h1>
+{% endif %}
+
+{% endblock %}
